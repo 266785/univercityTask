@@ -1,0 +1,27 @@
+<div class="classDiv" (click)= "toggleStudents()">
+    <h2>{{passedClass.className}}</h2>
+    <p>Students</p>
+    <div class="studentDiv">
+    <table id="users" *ngIf="toggle">
+        <tr>
+        <th *ngFor = "let column of headers">
+            {{column}}
+        </th>
+        <th></th>
+        </tr>
+    
+        <tr *ngFor = "let row of students">
+        <td *ngFor = "let column of headers">
+            {{row[column]}}
+        </td>
+        <td>
+            <button>Delete</button>
+            <button>Edit</button>
+        </td>
+        </tr>
+    
+    </table>
+    
+
+</div>
+</div>
