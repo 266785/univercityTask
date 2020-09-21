@@ -19,8 +19,8 @@
             {{row[column]}}
         </td>
         <td>
-            <button [routerLink] = "" >Delete</button>
-            <button  [routerLink]="['/student/']"
+            <button>Delete</button>
+            <button  [routerLink]="'student'"
                 [queryParams]="{st:row | json }"> Edit</button>
 
         </td>
