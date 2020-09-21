@@ -1,1 +1,8 @@
-<p>dialog-component works!</p>
+<form [formGroup]="classManager" (ngSubmit)="onSubmit()">
+    <label>
+      Class Name:
+      <input type="text" formControlName="className" value="{{data.className}}" [(ngModel)]="data.className">
+    </label>
+    <button type="submit" [disabled]="!classManager.valid" [mat-dialog-close]="data.className">Submit</button>
+  
+  </form>

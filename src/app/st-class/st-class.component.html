@@ -1,6 +1,10 @@
-<div class="classDiv" (click)= "toggleStudents()">
-    <h2>{{passedClass.className}}</h2>
+<div class="classDiv" >
+    <h2 (click)= "toggleStudents()">{{passedClass.className}}</h2>
     <p>Students</p>
+    
+    <button id="editClassBtn" (click)="editClass()">Edit Class</button>
+    <button id="deleteClassBtn" (click)="deleteClass()">Delete Class</button>
+
     <div class="studentDiv">
     <table id="users" *ngIf="toggle">
         <tr>
@@ -15,8 +19,10 @@
             {{row[column]}}
         </td>
         <td>
-            <button>Delete</button>
-            <button>Edit</button>
+            <button [routerLink] = "" >Delete</button>
+            <button  [routerLink]="['/student/']"
+                [queryParams]="{st:row | json }"> Edit</button>
+
         </td>
         </tr>
     

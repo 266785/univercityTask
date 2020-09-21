@@ -1,13 +1,19 @@
 import { Component, NgModule } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { DialogComponentComponent } from './dialog-component/dialog-component.component'
+
+export interface inputClass {
+  className: String,
+  subjects: String,
+  department: String,
+}
 
 @NgModule({
   imports: [
     MatDialog,
-  ],
 
+  ],
   declarations: [
     AppComponent,
     DialogComponentComponent,
@@ -27,7 +33,10 @@ export class AppComponent {
 
   title = 'Univercity';
 
-  classes = [
+  className: string;
+  class: inputClass;
+
+  public classes = [
     {
       className: "Class 0",
       subjects: "??",
@@ -55,20 +64,20 @@ export class AppComponent {
     },
   ]
 
-  students = [
+  public students = [
     {
       "First Name": "Lorem",
       "Last Name": "Phasellus",
       "Address": "Morbi id justo dictum",
       "GPA": 25,
-      className: "Class 0"
+      className: "Class 1"
     },
     {
       "First Name": "Vivamus",
       "Last Name": "Quisque",
       "Address": "Sed hendrerit enim",
       "GPA": 30,
-      className: "Class 0"
+      className: "Class 1"
     },
     {
       "First Name": "Fusce",
@@ -172,13 +181,20 @@ export class AppComponent {
   ];
 
   addClass(){
-    const dialogRef = this.dialog.open(DialogComponentComponent,{
-      height: '400px',
-      width: '600px',
+    const dialogRef = this.dialog.open(DialogComponentComponent, {
+      width: '250px',
+      data: {className: this.className}
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      if(!this.classes.some(cl => cl.className === result)){
+        this.classes.push({
+          className: result,
+          subjects: "??",
+          department: "??",
+        },)
+      }
+
     });
   }
 }
