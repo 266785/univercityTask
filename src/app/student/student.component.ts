@@ -21,23 +21,23 @@ export class StudentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) { }
 
+  getStudent(){
+    this.route.params.subscribe(params => {
+      console.log("inside route subscribe")
+      console.log(params['st'])
+      this.student = JSON.parse(params.st) as inputStudents;
+      console.log(this.student)
+      });
+    }
   
   ngOnInit(): void {
-    console.log("inside on init");
     this.router.events.subscribe(val => {
       //console.log(val.state.root.firstChild.params);
-
-
+      //console.log(val);
+      
+       this.getStudent();
       });
   }
-  // getStudent(){
-  //   this.route.params.subscribe(params => {
-  //     console.log("inside route subscribe")
-  //     console.log(params['st'])
-  //     this.student = JSON.parse(params.st) as inputStudents;
-  //     console.log(this.student)
-  //     });
-  //   }
-  //   a = this.getStudent();
-  
+    
+
 }
