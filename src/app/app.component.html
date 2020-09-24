@@ -1,7 +1,8 @@
 <h1>{{title}}</h1>
-<button id="addClassBtn" (click)="addClass()">Add Class</button>
-<div *ngFor="let class of classes">
-    <app-st-class [passedClass]="class" [passedStudents]="students">
-    </app-st-class>
+<button id="homeBtn" (click)="goHome()">Home</button>
+<button id="classBtn" (click)="showClasses()">Show classes</button>
+
+<div id="comp-render" *ngIf="displayClasses">
+    <app-class-list></app-class-list>
 </div>
 <router-outlet></router-outlet>

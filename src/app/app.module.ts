@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponentComponent } from './dialog-component/dialog-component.component';
 import { StClassComponentDialog } from './st-class/st-class.component';
 import { StudentComponent } from './student/student.component';
+import { ClassListComponent } from './class-list/class-list.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { StudentComponent } from './student/student.component';
     DialogComponentComponent,
     StClassComponentDialog,
     StudentComponent,
+    ClassListComponent,
   ],
   imports: [
     MatDialogModule,

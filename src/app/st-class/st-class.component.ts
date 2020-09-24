@@ -1,8 +1,8 @@
 import { Component, Input,ViewContainerRef, NgModule } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { AppComponent } from '../app.component';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
 import { StudentComponent } from '../student/student.component';
+import { ClassListComponent } from '../class-list/class-list.component';
 
 export interface inputClass {
   className: string,
@@ -23,7 +23,6 @@ export interface inputStudents {
   ],
 
   declarations: [
-    AppComponent,
     DialogComponentComponent,
     StudentComponent,
   ],
@@ -38,6 +37,7 @@ export interface inputStudents {
   templateUrl: './st-class.component.html',
   styleUrls: ['./st-class.component.scss']
 })
+
 export class StClassComponent{
   constructor(private viewContainerRef: ViewContainerRef, public dialog: MatDialog, public warnDialog: MatDialog) { }
 
@@ -52,6 +52,10 @@ export class StClassComponent{
   ngOnInit(){
     this.class = this.passedClass;
     this.students = this.passedStudents.filter(st => st.className==this.class.className);
+  }
+
+  hideClasses(){
+    
   }
 
   deleteClass(){
@@ -99,7 +103,7 @@ export class StClassComponent{
     this.getParentComponent().classes;
   }
 
-  getParentComponent(): AppComponent {
+  getParentComponent(): ClassListComponent {
     return this.viewContainerRef[ '_data' ]
       .componentView.component.viewContainerRef[ '_view' ]
       .component

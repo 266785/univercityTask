@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, RoutesRecognized } from '@angular/router';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 export interface inputStudents {
   "First Name": string,
@@ -15,29 +17,25 @@ export interface inputStudents {
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss']
 })
-export class StudentComponent implements OnInit {
+export class StudentComponent implements OnInit{
   theRecord: inputStudents = null;
   student: inputStudents;
 
-  constructor(private route: ActivatedRoute, private router: Router, private formBuilder: FormBuilder) { }
 
-  getStudent(){
-    this.route.params.subscribe(params => {
-      console.log("inside route subscribe")
-      console.log(params['st'])
-      this.student = JSON.parse(params.st) as inputStudents;
-      console.log(this.student)
-      });
-    }
-  
-  ngOnInit(): void {
-    this.router.events.subscribe(val => {
-      //console.log(val.state.root.firstChild.params);
-      //console.log(val);
-      
-       this.getStudent();
-      });
-  }
+  constructor(public route: ActivatedRoute, public router: Router, private formBuilder: FormBuilder) { }
+
+  ngOnInit(){
     
-
+    this.route.paramMap
+      .pipe(map(() => {
+        this.student = JSON.parse(window.history.state.st) as inputStudents;
+      }))
+      .subscribe();
+      
+     console.log("inside on init")
+     
+      console.log(this.student)
+  }
 }
+  
+
