@@ -1,34 +1,35 @@
 import { Component, NgModule } from '@angular/core';
-import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
-import { ClassListComponent } from './class-list/class-list.component';
+import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+import { DialogComponentComponent } from './dialog-component/dialog-component.component'
+
+export interface inputClass {
+  className: String,
+  subjects: String,
+  department: String,
+}
 
 @NgModule({
   imports: [
-    ClassListComponent,
-  ],
-})
+    MatDialog,
 
+  ],
+  declarations: [
+    AppComponent,
+    DialogComponentComponent,
+  ],
+  entryComponents: [
+    DialogComponentComponent,
+  ],
+  
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  public title = 'University';
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
-
-  title = 'Univercity';
-  displayClasses = false;
-
-
-
-  goHome(){
-    this.displayClasses=false;
-  }
-
-  showClasses(){
-    this.displayClasses= !this.displayClasses;
-  }
-
-
+  constructor() {}
 }

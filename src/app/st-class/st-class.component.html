@@ -1,33 +1,31 @@
-<div class="classDiv" >
-    <h2 (click)= "toggleStudents()">{{passedClass.className}}</h2>
-    <p>Students</p>
-    
-    <button id="editClassBtn" (click)="editClass()">Edit Class</button>
-    <button id="deleteClassBtn" (click)="deleteClass()">Delete Class</button> 
+<div class="classDiv">
+  <h2 (click)="toggleStudents()">{{passedClass.className}}</h2>
+  <p>Students</p>
 
-    <div class="studentDiv">
+  <button id="editClassBtn" (click)="editClass()">Edit Class</button>
+  <button id="deleteClassBtn" (click)="deleteClass()">Delete Class</button>
+
+  <div class="studentDiv">
     <table id="users" *ngIf="toggle">
-        <tr>
-        <th *ngFor = "let column of headers">
-            {{column}}
+      <tr>
+        <th *ngFor="let column of headers">
+          {{column}}
         </th>
         <th></th>
-        </tr>
-    
-        <tr *ngFor = "let row of students">
-        <td *ngFor = "let column of headers">
-            {{row[column]}}
+      </tr>
+
+      <tr *ngFor="let row of students">
+        <td *ngFor="let column of headers">
+          {{row[column]}}
         </td>
         <td>
             <button>Delete</button>
-            <button  [routerLink]='"/student"'
-                [state]="{st:row | json }" (click)="hideClasses()"> Edit</button>
+            <button  [routerLink]="'/student'"
+                [state]="{st:row | json }"> Edit</button>
 
         </td>
-        </tr>
-    
+      </tr>
     </table>
-    
 
-</div>
+  </div>
 </div>

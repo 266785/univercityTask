@@ -1,46 +1,36 @@
-import { Component, NgModule, ViewContainerRef } from '@angular/core';
-
-
-import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AppComponent } from '../app.component';
+import { Component, Input,ViewContainerRef, NgModule } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {AppComponent, inputClass} from '../app.component';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
-
-
-export interface inputClass {
-  className: String,
-  subjects: String,
-  department: String,
-}
+import { StudentComponent } from '../student/student.component';
+import {Router} from "@angular/router";
 
 @NgModule({
   imports: [
     MatDialog,
   ],
+
   declarations: [
-    ClassListComponent,
+    AppComponent,
     DialogComponentComponent,
+    StudentComponent,
   ],
   entryComponents: [
     DialogComponentComponent,
+    
   ],
   
 })
-
 @Component({
-  selector: 'app-class-list',
+  selector: 'class-list',
   templateUrl: './class-list.component.html',
   styleUrls: ['./class-list.component.scss']
 })
-
 export class ClassListComponent{
+  constructor(public dialog: MatDialog) {}
 
-  constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef) {}
-
-  getParentComponent(): ClassListComponent {
-    return this.viewContainerRef[ '_data' ]
-      .componentView.component.viewContainerRef[ '_view' ]
-      .component
-  }
+  className: string;
+  class: inputClass;
 
   public classes = [
     {
@@ -68,7 +58,7 @@ export class ClassListComponent{
       subjects: "??",
       department: "??",
     },
-  ]
+  ];
 
   public students = [
     {
@@ -186,10 +176,6 @@ export class ClassListComponent{
 
   ];
 
-
-  className: string;
-  class: inputClass;
-
   addClass(){
     const dialogRef = this.dialog.open(DialogComponentComponent, {
       width: '250px',
@@ -197,7 +183,6 @@ export class ClassListComponent{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
       if(!this.classes.some(cl => cl.className === result)){
         this.classes.push({
           className: result,
@@ -208,5 +193,4 @@ export class ClassListComponent{
 
     });
   }
-
 }

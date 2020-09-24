@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponentComponent } from './dialog-component/dialog-component.component';
 import { StClassComponentDialog } from './st-class/st-class.component';
 import { StudentComponent } from './student/student.component';
-import { ClassListComponent } from './class-list/class-list.component';
+import {ClassListComponent} from "./class-list/class-list.component";
 
 
 @NgModule({
@@ -21,7 +21,7 @@ import { ClassListComponent } from './class-list/class-list.component';
     DialogComponentComponent,
     StClassComponentDialog,
     StudentComponent,
-    ClassListComponent,
+    ClassListComponent
   ],
   imports: [
     MatDialogModule,
@@ -29,6 +29,7 @@ import { ClassListComponent } from './class-list/class-list.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+
   ],
   entryComponents: [
     DialogComponentComponent,
