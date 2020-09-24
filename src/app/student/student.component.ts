@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap, RoutesRecognized } from '@angular/router';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 export interface inputStudents {
   "First Name": string,
