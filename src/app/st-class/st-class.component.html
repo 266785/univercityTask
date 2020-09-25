@@ -15,14 +15,13 @@
         </tr>
     
         <tr *ngFor = "let row of students">
-        <td *ngFor = "let column of headers">
+        <td *ngFor = "let column of columnTags">
             {{row[column]}}
         </td>
         <td>
             <button>Delete</button>
             <button  [routerLink]='"/student"'
                 [state]="{st:row | json }" (click)="hideClasses()"> Edit</button>
-
         </td>
         </tr>
     

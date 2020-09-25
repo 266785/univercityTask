@@ -1,5 +1,5 @@
-import { Component, Input,ViewContainerRef, NgModule } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { Component, Input, ViewContainerRef, NgModule } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
 import { StudentComponent } from '../student/student.component';
 import { ClassListComponent } from '../class-list/class-list.component';
@@ -10,10 +10,10 @@ export interface inputClass {
   department: string,
 }
 export interface inputStudents {
-  "First Name": string,
-  "Last Name": string,
-  "Address": string,
-  "GPA": number,
+  firstName: string,
+  lastName: string,
+  address: string,
+  gpa: number,
   className: string,
 }
 
@@ -28,7 +28,6 @@ export interface inputStudents {
   ],
   entryComponents: [
     DialogComponentComponent,
-    
   ],
   
 })
@@ -46,6 +45,7 @@ export class StClassComponent{
 
   toggle = false;
   headers = ["First Name", "Last Name", "GPA", ];
+  columnTags = ["firstName", "lastName", "gpa", ];
   students: inputStudents[];
   class: inputClass;
 

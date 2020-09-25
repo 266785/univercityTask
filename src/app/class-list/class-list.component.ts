@@ -1,6 +1,5 @@
 import { Component, NgModule, ViewContainerRef } from '@angular/core';
 
-
 import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AppComponent } from '../app.component';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
@@ -36,11 +35,7 @@ export class ClassListComponent{
 
   constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef) {}
 
-  getParentComponent(): ClassListComponent {
-    return this.viewContainerRef[ '_data' ]
-      .componentView.component.viewContainerRef[ '_view' ]
-      .component
-  }
+ 
 
   public classes = [
     {
@@ -72,115 +67,115 @@ export class ClassListComponent{
 
   public students = [
     {
-      "First Name": "Lorem",
-      "Last Name": "Phasellus",
-      "Address": "Morbi id justo dictum",
-      "GPA": 25,
+      firstName: "Lorem",
+      lastName: "Phasellus",
+      address: "Morbi id justo dictum",
+      gpa: 25,
       className: "Class 1"
     },
     {
-      "First Name": "Vivamus",
-      "Last Name": "Quisque",
-      "Address": "Sed hendrerit enim",
-      "GPA": 30,
+      firstName: "Vivamus",
+      lastName: "Quisque",
+      address: "Sed hendrerit enim",
+      gpa: 30,
       className: "Class 1"
     },
     {
-      "First Name": "Fusce",
-      "Last Name": "Curabitur",
-      "Address": "Vestibulum molestie lacus ac",
-      "GPA": 21,
+      firstName: "Fusce",
+      lastName: "Curabitur",
+      address: "Vestibulum molestie lacus ac",
+      gpa: 21,
       className: "Class 1"
     },
     {
-      "First Name": "Praesent",
-      "Last Name": "Aenean",
-      "Address": "Ut iaculis ipsum sit amet nisl",
-      "GPA": 17,
+      firstName: "Praesent",
+      lastName: "Aenean",
+      address: "Ut iaculis ipsum sit amet nisl",
+      gpa: 17,
       className: "Class 2"
     },
     {
-      "First Name": "Lorem",
-      "Last Name": "Phasellus",
-      "Address": "Morbi id justo dictum",
-      "GPA": 25,
+      firstName: "Lorem",
+      lastName: "Phasellus",
+      address: "Morbi id justo dictum",
+      gpa: 25,
       className: "Class 1"
     },
     {
-      "First Name": "Vivamus",
-      "Last Name": "Quisque",
-      "Address": "Sed hendrerit enim",
-      "GPA": 30,
+      firstName: "Vivamus",
+      lastName: "Quisque",
+      address: "Sed hendrerit enim",
+      gpa: 30,
       className: "Class 0"
     },
     {
-      "First Name": "Fusce",
-      "Last Name": "Curabitur",
-      "Address": "Vestibulum molestie lacus ac",
-      "GPA": 21,
+      firstName: "Fusce",
+      lastName: "Curabitur",
+      address: "Vestibulum molestie lacus ac",
+      gpa: 21,
       className: "Class 1"
     },
     {
-      "First Name": "Praesent",
-      "Last Name": "Aenean",
-      "Address": "Ut iaculis ipsum sit amet nisl",
-      "GPA": 17,
+      firstName: "Praesent",
+      lastName: "Aenean",
+      address: "Ut iaculis ipsum sit amet nisl",
+      gpa: 17,
       className: "Class 2"
     },
     {
-      "First Name": "Lorem",
-      "Last Name": "Phasellus",
-      "Address": "Morbi id justo dictum",
-      "GPA": 25,
+      firstName: "Lorem",
+      lastName: "Phasellus",
+      address: "Morbi id justo dictum",
+      gpa: 25,
       className: "Class 3"
     },
     {
-      "First Name": "Vivamus",
-      "Last Name": "Quisque",
-      "Address": "Sed hendrerit enim",
-      "GPA": 30,
+      firstName: "Vivamus",
+      lastName: "Quisque",
+      address: "Sed hendrerit enim",
+      gpa: 30,
       className: "Class 1"
     },
     {
-      "First Name": "Fusce",
-      "Last Name": "Curabitur",
-      "Address": "Vestibulum molestie lacus ac",
-      "GPA": 21,
+      firstName: "Fusce",
+      lastName: "Curabitur",
+      address: "Vestibulum molestie lacus ac",
+      gpa: 21,
       className: "Class 0"
     },
     {
-      "First Name": "Praesent",
-      "Last Name": "Aenean",
-      "Address": "Ut iaculis ipsum sit amet nisl",
-      "GPA": 17,
+      firstName: "Praesent",
+      lastName: "Aenean",
+      address: "Ut iaculis ipsum sit amet nisl",
+      gpa: 17,
       className: "Class 1"
     },
     {
-      "First Name": "Lorem",
-      "Last Name": "Phasellus",
-      "Address": "Morbi id justo dictum",
-      "GPA": 25,
+      firstName: "Lorem",
+      lastName: "Phasellus",
+      address: "Morbi id justo dictum",
+      gpa: 25,
       className: "Class 2"
     },
     {
-      "First Name": "Vivamus",
-      "Last Name": "Quisque",
-      "Address": "Sed hendrerit enim",
-      "GPA": 30,
+      firstName: "Vivamus",
+      lastName: "Quisque",
+      address: "Sed hendrerit enim",
+      gpa: 30,
       className: "Class 2"
     },
     {
-      "First Name": "Fusce",
-      "Last Name": "Curabitur",
-      "Address": "Vestibulum molestie lacus ac",
-      "GPA": 21,
+      firstName: "Fusce",
+      lastName: "Curabitur",
+      address: "Vestibulum molestie lacus ac",
+      gpa: 21,
       className: "Class 2"
     },
     {
-      "First Name": "Praesent",
-      "Last Name": "Aenean",
-      "Address": "Ut iaculis ipsum sit amet nisl",
-      "GPA": 17,
+      firstName: "Praesent",
+      lastName: "Aenean",
+      address: "Ut iaculis ipsum sit amet nisl",
+      gpa: 17,
       className: "Class 0"
     },
 

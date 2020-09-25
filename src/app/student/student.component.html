@@ -1,1 +1,33 @@
-<p>STUDENT COMPONENT</p>
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label>
+            First Name:
+            <input type="text" formControlName="firstName" > 
+        </label>
+    </div>
+    <div>
+        <label>
+            Last Name:
+            <input type="text" formControlName="lastName">
+        </label>
+    </div>
+    <div>
+        <label>
+            Address:
+            <input type="text" formControlName="address" >
+        </label>
+    </div>
+    <div>
+        <label>
+            GPA:
+            <input type="number" formControlName="gpa" >
+        </label>
+    </div>
+    <div>
+        <label>
+            Class Name:
+            <input type="text" formControlName="className" >
+        </label>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
