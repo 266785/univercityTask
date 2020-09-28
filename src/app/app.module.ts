@@ -12,6 +12,7 @@ import { DialogComponentComponent } from './dialog-component/dialog-component.co
 import { StClassComponentDialog } from './st-class/st-class.component';
 import { StudentComponent } from './student/student.component';
 import { ClassListComponent } from './class-list/class-list.component';
+import { StudentsService } from './students.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { ClassListComponent } from './class-list/class-list.component';
     DialogComponentComponent,
     StClassComponentDialog
   ],
-  providers: [],
+  providers: [StudentsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

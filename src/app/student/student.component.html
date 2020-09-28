@@ -1,4 +1,4 @@
-<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="studentForm" >
     <div>
         <label>
             First Name:
@@ -29,5 +29,5 @@
             <input type="text" formControlName="className" >
         </label>
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit" (click)="onSubmit()" [routerLink]='"/classes"'>Submit</button>
   </form>

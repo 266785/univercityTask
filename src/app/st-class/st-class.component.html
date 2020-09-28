@@ -6,27 +6,28 @@
     <button id="deleteClassBtn" (click)="deleteClass()">Delete Class</button> 
 
     <div class="studentDiv">
-    <table id="users" *ngIf="toggle">
-        <tr>
-        <th *ngFor = "let column of headers">
-            {{column}}
-        </th>
-        <th></th>
-        </tr>
+        <table id="users" *ngIf="toggle">
+            <tr>
+            <th *ngFor = "let column of headers">
+                {{column}}
+            </th>
+            <th></th>
+            </tr>
+        
+            <tr *ngFor = "let row of students">
+            <td *ngFor = "let column of columnTags">
+                {{row[column]}}
+            </td>
+            <td>
+                <button (click)="deleteStudent(row)">Delete</button>
+                <button  [routerLink]='"/student"'
+                    [state]="{st:row | json }"> Edit</button>
+            </td>
+            </tr>
+            <button id="addStudentBtn" [routerLink]='"/student"'
+                [state]="{className:passedClass.className| json}">Add Student</button> 
+        </table>
+        
+    </div>
     
-        <tr *ngFor = "let row of students">
-        <td *ngFor = "let column of columnTags">
-            {{row[column]}}
-        </td>
-        <td>
-            <button>Delete</button>
-            <button  [routerLink]='"/student"'
-                [state]="{st:row | json }" (click)="hideClasses()"> Edit</button>
-        </td>
-        </tr>
-    
-    </table>
-    
-
-</div>
 </div>

@@ -1,8 +1,11 @@
 import { Component, Input, ViewContainerRef, NgModule } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FormGroup, FormControl } from '@angular/forms';
+
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
 import { StudentComponent } from '../student/student.component';
 import { ClassListComponent } from '../class-list/class-list.component';
+import { StudentsService } from '../students.service';
 
 export interface inputClass {
   className: string,
@@ -29,7 +32,7 @@ export interface inputStudents {
   entryComponents: [
     DialogComponentComponent,
   ],
-  
+
 })
 @Component({
   selector: 'app-st-class',
@@ -38,7 +41,7 @@ export interface inputStudents {
 })
 
 export class StClassComponent{
-  constructor(private viewContainerRef: ViewContainerRef, public dialog: MatDialog, public warnDialog: MatDialog) { }
+  constructor(private viewContainerRef: ViewContainerRef, public dialog: MatDialog, public warnDialog: MatDialog, private studentsService: StudentsService) { }
 
   @Input() passedClass: inputClass;
   @Input() passedStudents: inputStudents[];
@@ -48,18 +51,12 @@ export class StClassComponent{
   columnTags = ["firstName", "lastName", "gpa", ];
   students: inputStudents[];
   class: inputClass;
-
   ngOnInit(){
     this.class = this.passedClass;
     this.students = this.passedStudents.filter(st => st.className==this.class.className);
   }
-
-  hideClasses(){
-    
-  }
-
   deleteClass(){
-    if(!this.getParentComponent().students.some(st => st.className == this.passedClass.className))
+    if(!this.studentsService.getStudents().some(st => st.className == this.passedClass.className))
       {
         this.getParentComponent().classes = this.getParentComponent().classes.filter(cl => cl.className.localeCompare(this.passedClass.className))
       }
@@ -101,6 +98,15 @@ export class StClassComponent{
       }
     });
     this.getParentComponent().classes;
+  }
+
+  deleteStudent(row: inputStudents){
+      this.students = this.students.filter(st => {
+        return !this.studentsService.compareStudents(st, row);
+      })
+      this.studentsService.setStudents(this.studentsService.getStudents().filter(st => {
+        return !this.studentsService.compareStudents(st, row);
+      }))
   }
 
   getParentComponent(): ClassListComponent {

@@ -1,8 +1,8 @@
-import { Component, NgModule, ViewContainerRef } from '@angular/core';
+import { Component, NgModule, ViewContainerRef, OnInit } from '@angular/core';
 
 import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AppComponent } from '../app.component';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
+import { StudentsService } from '../students.service';
 
 
 export interface inputClass {
@@ -10,7 +10,13 @@ export interface inputClass {
   subjects: String,
   department: String,
 }
-
+export interface student {
+  firstName: string,
+  lastName: string,
+  address: string,
+  gpa: number,
+  className: string,
+}
 @NgModule({
   imports: [
     MatDialog,
@@ -31,12 +37,15 @@ export interface inputClass {
   styleUrls: ['./class-list.component.scss']
 })
 
-export class ClassListComponent{
+export class ClassListComponent implements OnInit{
 
-  constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef) {}
+  constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef, private studentsService: StudentsService) {}
 
- 
+  public students: student[];
 
+  ngOnInit(): void {
+    this.students=this.studentsService.getStudents();
+  }
   public classes = [
     {
       className: "Class 0",
@@ -64,124 +73,6 @@ export class ClassListComponent{
       department: "??",
     },
   ]
-
-  public students = [
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 1"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 1"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 1"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 2"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 1"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 0"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 1"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 2"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 3"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 1"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 0"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 1"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 2"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 2"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 2"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 0"
-    },
-
-  ];
-
-
   className: string;
   class: inputClass;
 

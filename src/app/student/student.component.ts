@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 
 import { ClassListComponent } from '../class-list/class-list.component';
+import { StudentsService } from '../students.service';
 
 export interface inputStudents {
   firstName: string,
@@ -22,7 +23,13 @@ export interface inputStudents {
 export class StudentComponent{
   theRecord: inputStudents = null;
   student: inputStudents;
-  newStudent: inputStudents;
+  newStudent: inputStudents = {
+    firstName: "",
+    lastName: "",
+    address: "",
+    gpa: 0,
+    className: ""
+  };
 
   studentForm = new FormGroup({
     firstName: new FormControl(''),
@@ -32,42 +39,31 @@ export class StudentComponent{
     className: new FormControl(''),
   });
 
-  constructor(public route: ActivatedRoute, public router: Router, private viewContainerRef: ViewContainerRef) { }
+  constructor(public route: ActivatedRoute, public router: Router, private viewContainerRef: ViewContainerRef, private studentService: StudentsService) { }
 
   getParentComponent(): ClassListComponent {
-    // return this.viewContainerRef[ '_data' ]
-    // .componentView.component.viewContainerRef[ '_view' ]
-    //   .component
     return this.viewContainerRef[ '_data' ]
     .componentView.component.viewContainerRef[ '_view' ]
       .component
   }
 
+  private students = this.studentService.getStudents();
+
   onSubmit(){
-      this.setNewStudentValues();
-      console.log(this);
-      console.log(this.getParentComponent().students);
-
-      // if(!this.compareStudents(this.student,this.newStudent)){
-      // this.getParentComponent().students.map(st => {
-      //   if(this.compareStudents(st,this.student)){
-      //     st=this.newStudent;
-      //   }
-      //   return st;
-      // })
-    //}
-  }
-
-  compareStudents(st1: inputStudents, st2: inputStudents){
-    if(st1.firstName==st2.firstName &&
-      st1.lastName==st2.lastName &&
-      st1.address==st2.address &&
-      st1.gpa==st2.gpa &&
-      st1.className==st2.className){
-        return true;
-      }else{
-        return false;
+    this.setNewStudentValues();
+    if(window.history.state.st){
+      if(!this.studentService.compareStudents(this.student,this.newStudent)){
+      this.students = this.students.map(st => {
+        if(this.studentService.compareStudents(st,this.student)){
+          st=Object.assign(this.newStudent);
+        }
+        return st;
+      })
       }
+    }else{
+      this.studentService.pushStudent(this.newStudent);
+    }
+    this.studentService.setStudents(this.students);
   }
 
   setFormValues(){
@@ -90,14 +86,19 @@ export class StudentComponent{
 
 
   ngOnInit(){
-    this.route.paramMap
-      .pipe(map(() => {
-        this.student = JSON.parse(window.history.state.st) as inputStudents;
-        this.newStudent = JSON.parse(window.history.state.st) as inputStudents;
-      }))
-      .subscribe();
-     
-      this.setFormValues();
+    if(window.history.state.st){
+      this.route.paramMap
+        .pipe(map(() => {
+          this.student = JSON.parse(window.history.state.st) as inputStudents;
+        }))
+        .subscribe();
+        this.setFormValues();
+      }else{
+        this.studentForm.patchValue({
+          className: JSON.parse(window.history.state.className)
+        });
+        this.studentForm.get('className').disable();
+      }
   }
 }
   
