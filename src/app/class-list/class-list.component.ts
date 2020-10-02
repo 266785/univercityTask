@@ -3,20 +3,9 @@ import { Component, NgModule, ViewContainerRef, OnInit } from '@angular/core';
 import {MatDialog,MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DialogComponentComponent } from '../dialog-component/dialog-component.component'
 import { StudentsService } from '../students.service';
+import { Student } from '../models/student.model';
+import { StClass } from '../models/stClass.model';
 
-
-export interface inputClass {
-  className: String,
-  subjects: String,
-  department: String,
-}
-export interface student {
-  firstName: string,
-  lastName: string,
-  address: string,
-  gpa: number,
-  className: string,
-}
 @NgModule({
   imports: [
     MatDialog,
@@ -41,40 +30,20 @@ export class ClassListComponent implements OnInit{
 
   constructor(public dialog: MatDialog, private viewContainerRef: ViewContainerRef, private studentsService: StudentsService) {}
 
-  public students: student[];
+  public students: Student[];
 
   ngOnInit(): void {
     this.students=this.studentsService.getStudents();
   }
   public classes = [
-    {
-      className: "Class 0",
-      subjects: "??",
-      department: "??",
-    },
-    {
-      className: "Class 1",
-      subjects: "??",
-      department: "??",
-    },
-    {
-      className: "Class 2",
-      subjects: "??",
-      department: "??",
-    },
-    {
-      className: "Class 3",
-      subjects: "??",
-      department: "??",
-    },
-    {
-      className: "Class 4",
-      subjects: "??",
-      department: "??",
-    },
+    new StClass("Class 0","??","??",),
+    new StClass("Class 1","??","??",),
+    new StClass("Class 2","??","??",),
+    new StClass("Class 3","??","??",),
+    new StClass("Class 4","??","??",),
   ]
   className: string;
-  class: inputClass;
+  class: StClass;
 
   addClass(){
     const dialogRef = this.dialog.open(DialogComponentComponent, {
@@ -84,14 +53,9 @@ export class ClassListComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       
-      if(!this.classes.some(cl => cl.className === result)){
-        this.classes.push({
-          className: result,
-          subjects: "??",
-          department: "??",
-        },)
+      if(!this.classes.some(cl => cl.getClassName() === result)){
+        this.classes.push(new StClass(result,"??","??"));
       }
-
     });
   }
 

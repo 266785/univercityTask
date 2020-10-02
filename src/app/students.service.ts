@@ -1,132 +1,31 @@
-import { Injectable } from '@angular/core';
-
-export interface student {
-  firstName: string,
-  lastName: string,
-  address: string,
-  gpa: number,
-  className: string,
-}
+import { Injectable} from '@angular/core';
+import { Student } from './models/student.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class StudentsService {
-  public students: student[] = [
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 1"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 1"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 1"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 2"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo ddictum",
-      gpa: 25,
-      className: "Class 1"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 0"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 1"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 2"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 3"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 1"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 0"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 1"
-    },
-    {
-      firstName: "Lorem",
-      lastName: "Phasellus",
-      address: "Morbi id justo dictum",
-      gpa: 25,
-      className: "Class 2"
-    },
-    {
-      firstName: "Vivamus",
-      lastName: "Quisque",
-      address: "Sed hendrerit enim",
-      gpa: 30,
-      className: "Class 2"
-    },
-    {
-      firstName: "Fusce",
-      lastName: "Curabitur",
-      address: "Vestibulum molestie lacus ac",
-      gpa: 21,
-      className: "Class 2"
-    },
-    {
-      firstName: "Praesent",
-      lastName: "Aenean",
-      address: "Ut iaculis ipsum sit amet nisl",
-      gpa: 17,
-      className: "Class 0"
-    },
+  st = new Student("","","",1,"")
 
+  public students: Student[] = [
+    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 1"),
+    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 1"),
+    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 1"),
+    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 1"),
+    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 2"),
+    new Student("Lorem","Phasellus","Morbi id justo ddictum",25,"Class 1"),
+    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 0"),
+    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 1"),
+    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 2"),
+    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 3"),
+    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 1"),
+    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 0"),
+    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 1"),
+    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 2"),
+    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 2"),
+    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 2"),
+    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 0"),
   ];
 
   constructor() { }
@@ -134,23 +33,23 @@ export class StudentsService {
   getStudents(){
     return this.students;
   }
-  setStudents(newStudents: student[]){
+  setStudents(newStudents: Student[]){
     this.students=newStudents;
   }
 
-  compareStudents(st1: student, st2: student){
-    if(st1.firstName==st2.firstName &&
-      st1.lastName==st2.lastName &&
-      st1.address==st2.address &&
-      st1.gpa==st2.gpa &&
-      st1.className==st2.className){
+  compareStudents(st1: Student, st2: Student){
+    if(st1.getFirstName()==st2.getFirstName() &&
+      st1.getLastName()==st2.getLastName() &&
+      st1.getAddress()==st2.getAddress() &&
+      st1.getGpa()==st2.getGpa() &&
+      st1.getClassName()==st2.getClassName()){
         return true;
       }else{
         return false;
       }
   }
 
-  pushStudent(st: student){
+  pushStudent(st: Student){
     this.students.push(st);
   }
 }

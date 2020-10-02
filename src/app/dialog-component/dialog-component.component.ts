@@ -2,14 +2,7 @@ import { Component,  NgModule, Inject } from '@angular/core';
 
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  FormGroup, FormControl } from '@angular/forms';
-
-
-
-export interface InputClass {
-  className: String,
-  subjects: String,
-  department: String,
-}
+import { StClass } from '../models/stClass.model';
 
 @NgModule({
   imports: [
@@ -26,7 +19,7 @@ export interface InputClass {
 export class DialogComponentComponent{
   constructor(
     public dialogRef: MatDialogRef<DialogComponentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: InputClass) {}
+    @Inject(MAT_DIALOG_DATA) public data: StClass) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -37,9 +30,7 @@ export class DialogComponentComponent{
   });
 
   onSubmit() {
-    
     return(this.classManager.value);
-
   }
 
 }

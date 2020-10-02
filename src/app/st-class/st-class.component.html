@@ -1,5 +1,5 @@
 <div class="classDiv" >
-    <h2 (click)= "toggleStudents()">{{passedClass.className}}</h2>
+    <h2 (click)= "toggleStudents()">{{passedClass.getClassName()}}</h2>
     <p>Students</p>
     
     <button id="editClassBtn" (click)="editClass()">Edit Class</button>
@@ -25,7 +25,7 @@
             </td>
             </tr>
             <button id="addStudentBtn" [routerLink]='"/student"'
-                [state]="{className:passedClass.className| json}">Add Student</button> 
+                [state]="{className:passedClass.getClassName() | json}">Add Student</button> 
         </table>
         
     </div>

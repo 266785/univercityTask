@@ -6,14 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { ClassListComponent } from '../class-list/class-list.component';
 import { StudentsService } from '../students.service';
-
-export interface inputStudents {
-  firstName: string,
-  lastName: string,
-  address: string,
-  gpa: number,
-  className: string,
-}
+import { Student } from '../models/student.model';
 
 @Component({
   selector: 'app-student',
@@ -21,15 +14,9 @@ export interface inputStudents {
   styleUrls: ['./student.component.scss']
 })
 export class StudentComponent{
-  theRecord: inputStudents = null;
-  student: inputStudents;
-  newStudent: inputStudents = {
-    firstName: "",
-    lastName: "",
-    address: "",
-    gpa: 0,
-    className: ""
-  };
+  theRecord: Student = null;
+  student: Student;
+  newStudent = new Student("default","default","default",1,"default");
 
   studentForm = new FormGroup({
     firstName: new FormControl(''),
@@ -40,12 +27,6 @@ export class StudentComponent{
   });
 
   constructor(public route: ActivatedRoute, public router: Router, private viewContainerRef: ViewContainerRef, private studentService: StudentsService) { }
-
-  getParentComponent(): ClassListComponent {
-    return this.viewContainerRef[ '_data' ]
-    .componentView.component.viewContainerRef[ '_view' ]
-      .component
-  }
 
   private students = this.studentService.getStudents();
 
@@ -68,20 +49,20 @@ export class StudentComponent{
 
   setFormValues(){
     this.studentForm.patchValue({
-      firstName: this.student.firstName,
-      lastName: this.student.lastName,
-      address: this.student.address,
-      gpa: this.student.gpa,
-      className: this.student.className,
+      firstName: this.student.getFirstName(),
+      lastName: this.student.getLastName(),
+      address: this.student.getAddress(),
+      gpa: this.student.getGpa(),
+      className: this.student.getClassName(),
     })
   }
 
   setNewStudentValues(){
-    this.newStudent.firstName=this.studentForm.get('firstName').value;
-    this.newStudent.lastName=this.studentForm.get('lastName').value;
-    this.newStudent.address=this.studentForm.get('address').value;
-    this.newStudent.gpa=this.studentForm.get('gpa').value;
-    this.newStudent.className=this.studentForm.get('className').value;
+    this.newStudent.setFirstName(this.studentForm.get('firstName').value);
+    this.newStudent.setLastName(this.studentForm.get('lastName').value);
+    this.newStudent.setAddress(this.studentForm.get('address').value);
+    this.newStudent.setGpa(this.studentForm.get('gpa').value);
+    this.newStudent.setClassName(this.studentForm.get('className').value);
   }
 
 
@@ -89,7 +70,7 @@ export class StudentComponent{
     if(window.history.state.st){
       this.route.paramMap
         .pipe(map(() => {
-          this.student = JSON.parse(window.history.state.st) as inputStudents;
+          this.student = JSON.parse(window.history.state.st) as Student;
         }))
         .subscribe();
         this.setFormValues();
