@@ -1,33 +1,32 @@
-<form [formGroup]="studentForm" >
+<div *ngIf="isReady">
     <div>
         <label>
             First Name:
-            <input type="text" formControlName="firstName" > 
+            <input type="text" [(ngModel)]="student.firstName">
         </label>
     </div>
     <div>
         <label>
             Last Name:
-            <input type="text" formControlName="lastName">
+            <input type="text" [(ngModel)]="student.lastName">
         </label>
     </div>
     <div>
         <label>
             Address:
-            <input type="text" formControlName="address" >
+            <input type="text" [(ngModel)]="student.address">
         </label>
     </div>
     <div>
         <label>
             GPA:
-            <input type="number" formControlName="gpa" >
+            <input type="number" [(ngModel)]="student.gpa">
         </label>
     </div>
     <div>
         <label>
-            Class Name:
-            <input type="text" formControlName="className" >
+            Class Name: {{student.className}}
         </label>
     </div>
     <button type="submit" (click)="onSubmit()" [routerLink]='"/classes"'>Submit</button>
-  </form>
+  </div>

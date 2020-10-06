@@ -1,0 +1,5 @@
+<button id="addClassBtn" (click)="addClass()">Add Class</button>
+<div *ngFor="let universityClass of classes">
+    <university-class [passedClass]="universityClass">
+    </university-class>
+</div> 

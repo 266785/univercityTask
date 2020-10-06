@@ -1,8 +1,0 @@
-<form [formGroup]="classManager" (ngSubmit)="onSubmit()">
-    <label>
-      Class Name:
-      <input type="text" formControlName="className" value="{{data.getClassName()}}" [ngModel]="data.getClassName()">
-    </label>
-    <button type="submit" [disabled]="!classManager.valid" [mat-dialog-close]="data.getClassName()">Submit</button>
-  
-  </form>

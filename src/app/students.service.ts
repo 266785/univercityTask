@@ -1,55 +1,38 @@
-import { Injectable} from '@angular/core';
-import { Student } from './models/student.model';
+import {Injectable} from '@angular/core';
+import {Student} from './common/models/student';
+import {BehaviorSubject, Subject} from "rxjs";
+import {Observable} from 'rxjs/internal/Observable';
 
-@Injectable({
-  providedIn: 'root'
-})
-
+@Injectable()
 export class StudentsService {
-  st = new Student("","","",1,"")
 
-  public students: Student[] = [
-    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 1"),
-    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 1"),
-    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 1"),
-    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 1"),
-    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 2"),
-    new Student("Lorem","Phasellus","Morbi id justo ddictum",25,"Class 1"),
-    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 0"),
-    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 1"),
-    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 2"),
-    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 3"),
-    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 1"),
-    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 0"),
-    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 1"),
-    new Student("Lorem","Phasellus","Morbi id justo dictum",25,"Class 2"),
-    new Student("Vivamus","Quisque","Sed hendrerit enim",30,"Class 2"),
-    new Student("Fusce","Curabitur","Vestibulum molestie lacus ac",21,"Class 2"),
-    new Student("Praesent","Aenean","Ut iaculis ipsum sit amet nisl",17,"Class 0"),
-  ];
+  private readonly _student$ = new BehaviorSubject<Student>(null);
+  private readonly _newStudent$ = new Subject<Student>();
 
   constructor() { }
 
-  getStudents(){
-    return this.students;
-  }
-  setStudents(newStudents: Student[]){
-    this.students=newStudents;
+  get studentSubject(): Subject<Student> {
+    return this._student$;
   }
 
-  compareStudents(st1: Student, st2: Student){
-    if(st1.getFirstName()==st2.getFirstName() &&
-      st1.getLastName()==st2.getLastName() &&
-      st1.getAddress()==st2.getAddress() &&
-      st1.getGpa()==st2.getGpa() &&
-      st1.getClassName()==st2.getClassName()){
-        return true;
-      }else{
-        return false;
-      }
+  get studentObservable(): Observable<Student> {
+    return this._student$.asObservable();
   }
 
-  pushStudent(st: Student){
-    this.students.push(st);
+  get newStudentSubject(): Subject<Student> {
+    return this._newStudent$;
   }
+
+  get newStudentObservable(): Observable<Student> {
+    return this._newStudent$.asObservable();
+  }
+
+  compareStudents(st1: Student, st2: Student) {
+    return st1.firstName == st2.firstName &&
+      st1.lastName == st2.lastName &&
+      st1.address == st2.address &&
+      st1.gpa == st2.gpa &&
+      st1.className == st2.className;
+  }
+
 }

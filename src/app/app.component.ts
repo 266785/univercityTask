@@ -1,12 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { Router, ActivatedRoute, Params, RoutesRecognized } from '@angular/router';
-import { ClassListComponent } from './class-list/class-list.component';
-
-@NgModule({
-  imports: [
-    ClassListComponent,
-  ],
-})
+import { ClassListComponent } from './component/class-list/class-list.component';
 
 @Component({
   selector: 'app-root',
@@ -17,18 +11,10 @@ export class AppComponent {
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
-  title = 'Univercity';
-  displayClasses = false;
-
-
+  title = 'University';
 
   goHome(){
-    this.displayClasses=false;
+    this.router.navigateByUrl('/');
   }
-
-  showClasses(){
-    this.displayClasses= !this.displayClasses;
-  }
-
 
 }

@@ -1,41 +1,42 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { MatDialogModule,} from '@angular/material/dialog';
-import { ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule,} from '@angular/material/dialog';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StClassComponent } from './st-class/st-class.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogComponentComponent } from './dialog-component/dialog-component.component';
-import { StClassComponentDialog } from './st-class/st-class.component';
-import { StudentComponent } from './student/student.component';
-import { ClassListComponent } from './class-list/class-list.component';
-import { StudentsService } from './students.service';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {WarningDialog, UniversityClassComponent} from './component/student-list/university-class.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UniversityClassDialogComponent} from './component/dialog-component/university-class-dialog.component';
+import {StudentComponent} from './component/student/student.component';
+import {ClassListComponent} from './component/class-list/class-list.component';
+import {StudentsService} from './students.service';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StClassComponent,
-    DialogComponentComponent,
-    StClassComponentDialog,
+    UniversityClassComponent,
+    UniversityClassDialogComponent,
+    WarningDialog,
     StudentComponent,
     ClassListComponent,
   ],
   imports: [
     MatDialogModule,
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
   ],
   entryComponents: [
-    DialogComponentComponent,
-    StClassComponentDialog
+    UniversityClassDialogComponent,
+    WarningDialog
   ],
   providers: [StudentsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,5 +1,5 @@
 <div class="classDiv" >
-    <h2 (click)= "toggleStudents()">{{passedClass.getClassName()}}</h2>
+    <h2 (click)= "toggleStudents()">{{passedClass.className}}</h2>
     <p>Students</p>
     
     <button id="editClassBtn" (click)="editClass()">Edit Class</button>
@@ -14,18 +14,16 @@
             <th></th>
             </tr>
         
-            <tr *ngFor = "let row of students">
+            <tr *ngFor = "let student of passedClass.students; let index = index">
             <td *ngFor = "let column of columnTags">
-                {{row[column]}}
+              {{student[column]}}
             </td>
             <td>
-                <button (click)="deleteStudent(row)">Delete</button>
-                <button  [routerLink]='"/student"'
-                    [state]="{st:row | json }"> Edit</button>
+                <button (click)="deleteStudent(student)">Delete</button>
+                <button (click)="editStudent(student, index)"> Edit</button>
             </td>
             </tr>
-            <button id="addStudentBtn" [routerLink]='"/student"'
-                [state]="{className:passedClass.getClassName() | json}">Add Student</button> 
+            <button id="addStudentBtn" (click)="addStudent()">Add Student</button>
         </table>
         
     </div>
